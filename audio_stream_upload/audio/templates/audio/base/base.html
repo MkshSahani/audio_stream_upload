@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+
+    </head>
+
+<body>
+
+
+   <!-- <audio id="audio1" controls="none">
+       <source src="{{ recentURL }}" type="audio/ogg">
+              <source src="/Users/ripjeetsingh/Desktop/audio_stream_upload/audio_stream_upload/audio_files/bensound-ukulele.mp3" type="audio/ogg">
+    {% comment %}
+        you can render here list of all audio file
+        front end work
+        see view there have all the data already in context.
+     {% endcomment %}
+   </audio> -->
+   <audio id="player" controls>
+     <source src = "{{ recentURL }}" type="audio/ogg">
+   </audio>
+<div>
+  <p id="remaining"></p>/
+  <p id="total"></p>
+
+   <button onclick = "document.getElementById('player').volume += 0.2">Vol+</button>
+   <button onclick = "document.getElementById('player').volume -= 0.2">Vol-</button>
+</div>
+<p id="audio-result"><p>
+  <script>
+        var audioPlayer = document.getElementById("player")
+      window.onload = function(){mainFxn()}
+
+      function mainFxn(){
+        audioPlayer.currentTime = `{{ tout }}`
+        audioPlayer.play()
+        setTimeout(checkAudioTime, `{{ ttout }}`);
+        setInterval(function(){
+          document.getElementById('remaining').innerHTML = audioPlayer.duration-audioPlayer.currentTime;
+          document.getElementById('total').innerHTML = audioPlayer.duration;
+
+        },1000);
+      }
+
+      function checkAudioTime(){
+        alert("timeout function")
+        var intervalFunction =  setInterval(function() {
+          console.log("qwerty")
+
+          if (audioPlayer.currentTime>15){
+            document.getElementById('audio-result').innerHTML = "audio played more than 1 minute"
+            clearInterval(intervalFunction)
+          }
+        },1000)
+
+      }
+
+
+      // function audioCross(intervalFunction){
+      //     console.log("interval function")
+      //
+      // }
+      // document.getElementById('audio-result').innerHTML= "Audio played more than 1 minute"
+  </script>
+</body>
+</html>
